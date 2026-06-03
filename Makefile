@@ -4,7 +4,8 @@ NAME := libasm.a
 SRCS	:= ft_strlen.asm \
 		   ft_strcpy.asm \
 		   ft_strcmp.asm \
-		   ft_write.asm
+		   ft_write.asm \
+		   ft_read.asm
 SRC_DIR	:= ./src/
 SRCS	:= $(addprefix $(SRC_DIR), $(SRCS))
 
@@ -14,7 +15,7 @@ OBJS	:= $(patsubst $(SRC_DIR)%.asm, $(OBJ_DIR)%.o, $(SRCS))
 ###
 
 ASM			:= nasm
-ASM_FLAGS	:= -f elf64 -g -F dwarf
+ASM_FLAGS	:= -f elf64
 AR			:= ar
 AR_FLAGS	:= -rcs
 
@@ -27,7 +28,7 @@ TEST_DIR	:= ./tests/
 TEST_SRCS	:= $(addprefix $(TEST_DIR), $(TEST_SRCS))
 
 CC			:= gcc
-CFLAGS		:= -Wall -Wextra -Werror -g
+CFLAGS		:= -Wall -Wextra -Werror
 
 ###
 
