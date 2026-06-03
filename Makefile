@@ -3,7 +3,8 @@ NAME := libasm.a
 
 SRCS	:= ft_strlen.asm \
 		   ft_strcpy.asm \
-		   ft_strcmp.asm
+		   ft_strcmp.asm \
+		   ft_write.asm
 SRC_DIR	:= ./src/
 SRCS	:= $(addprefix $(SRC_DIR), $(SRCS))
 
