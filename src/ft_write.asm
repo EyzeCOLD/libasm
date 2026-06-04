@@ -1,13 +1,14 @@
+%include "src/libasm.inc"
+
 extern __errno_location
 
 section .text
 global ft_write
 ft_write:	; params: fd, buffer, length
-	mov rax, 1		; sys_write
+	mov rax, SYS_WRITE
 	syscall
-	cmp rax, -4095	; -1 - -4095 is the conventional range for error returns
-	jae .error		; we treat the return as unsigned so the errors are at the
-					; tippity-top of the range
+	cmp rax, -4096	; -1 - -4095 reserved for errors
+	ja .error		; treating return as unsigned
 	jmp .return
 
 	.error:

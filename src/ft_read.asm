@@ -1,12 +1,14 @@
+%include "src/libasm.inc"
+
 extern __errno_location
 
 section .text
 global ft_read
 ft_read:	; params: fd, buf, count
-	mov rax, 0	; sys_write
+	mov rax, SYS_READ
 	syscall
-	cmp rax, -4095
-	jae .error
+	cmp rax, -4096
+	ja .error
 	jmp .return
 
 	.error:
