@@ -9,7 +9,7 @@ ft_write:	; params: fd, buffer, length
 	syscall
 	cmp rax, -4096	; -1 - -4095 reserved for errors
 	ja .error		; treating return as unsigned
-	jmp .return
+	ret
 
 	.error:
 		neg rax
@@ -18,8 +18,6 @@ ft_write:	; params: fd, buffer, length
 		pop rcx							; rcx = old rax (from stack)
 		mov [rax], rcx					; write to errno
 		mov rax, -1
-
-	.return:
 		ret
 
 section .note.GNU-stack noalloc noexec nowrite progbits

@@ -14,25 +14,23 @@ section .text
 global ft_strdup
 ft_strdup:	; params: string
 	push rdi		; original string address on the stack
-	push 0			; 16-bit stack alignment
+	sub rsp, 8		; 16-bit stack alignment
 	call ft_strlen wrt ..plt
 
 	mov rdi, rax
 	inc rdi
 	call malloc wrt ..plt
 	test rax, rax
-	pop rsi			; stack alignment
+	add rsp, 8
 	pop rsi
 	jz .error
 
 	mov rdi, rax
 	call ft_strcpy wrt ..plt
+	ret
 
-	jmp .return
 	.error:
-		mov rax, 0
-	
-	.return:
+		xor rax, rax
 		ret
 
 section .note.GNU-stack noalloc noexec nowrite progbits

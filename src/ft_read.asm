@@ -9,7 +9,7 @@ ft_read:	; params: fd, buf, count
 	syscall
 	cmp rax, -4096
 	ja .error
-	jmp .return
+	ret
 
 	.error:
 		neg rax
@@ -18,8 +18,6 @@ ft_read:	; params: fd, buf, count
 		pop rcx
 		mov [rax], rcx
 		mov rax, -1
-
-	.return:
 		ret
 
 section .note.GNU-stack noalloc noexec nowrite progbits
