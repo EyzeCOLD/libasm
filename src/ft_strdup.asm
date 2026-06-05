@@ -1,13 +1,5 @@
 %include "src/libasm.inc"
 
-section .rodata
-; prot flags
-PROT_READ	equ 00000001b
-PROT_WRITE	equ 00000010b
-; map flags
-MAP_ANON	equ 00100000b
-MAP_PRIVATE	equ 00000010b
-
 extern malloc
 extern ft_strlen
 extern ft_strcpy
