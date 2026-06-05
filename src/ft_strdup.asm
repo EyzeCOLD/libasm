@@ -1,4 +1,6 @@
 %include "src/libasm.inc"
+
+section .rodata
 ; prot flags
 PROT_READ	equ 00000001b
 PROT_WRITE	equ 00000010b
@@ -15,7 +17,7 @@ global ft_strdup
 ft_strdup:	; params: string
 	push rdi		; original string address on the stack
 	sub rsp, 8		; 16-bit stack alignment
-	call ft_strlen wrt ..plt
+	call ft_strlen
 
 	mov rdi, rax
 	inc rdi
@@ -26,7 +28,7 @@ ft_strdup:	; params: string
 	jz .error
 
 	mov rdi, rax
-	call ft_strcpy wrt ..plt
+	call ft_strcpy
 	ret
 
 	.error:

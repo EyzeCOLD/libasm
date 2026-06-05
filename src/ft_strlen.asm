@@ -1,5 +1,4 @@
 global ft_strlen
-
 ft_strlen:	; params: string
 	mov rax, -1
 	.loop:

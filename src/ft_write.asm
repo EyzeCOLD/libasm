@@ -14,7 +14,15 @@ ft_write:	; params: fd, buffer, length
 	.error:
 		neg rax
 		push rax						; rax on stack
-		call __errno_location wrt ..plt	; rax = &errno, indirect call via PLT
+		call __errno_location wrt ..plt	; rax = &errno
+		; wrt ..plt = With Reference To Procedure Linkage Table
+		; Basically, errno lives in dynamically linked libc, so the address
+		; won't be known until runtime.
+		; This has to do with Address Space Layout Randomization (ASLR),
+		; a security feature where things are loaded to randomized
+		; addresses every run. ASLR requires making our executable to be 
+		; a Position Independent Executable (PIE). So we can't use
+		; hardcoded addresses
 		pop rcx							; rcx = old rax (from stack)
 		mov [rax], rcx					; write to errno
 		mov rax, -1
