@@ -46,13 +46,13 @@ Like many of the assembly instructions, `mov` has many variants like `movzx` (ze
 >Most of the time NASM can infer the size of the operation when you do a `mov`, but with indirection it can become ambiguous. In those situations you should use an operation size specifier, e.g. `mov byte [rax], rdi`. The size specifiers are `byte`, `word` (2 bytes), `dword` (4 bytes) and `qword` (8 bytes).
 
 ⚠️ Note
-> You can't have both operands of `mov` be dereferenced pointers. If you need to `mov [rax], [rcx]` you have to first store the value pointer by rcx into an intermediary register and then copy it from there to `rax`'s address
+> You can't have both operands of `mov` be dereferenced pointers. If you need to `mov [rax], [rcx]` you have to first store the value pointed by rcx into an intermediary register and then copy it from there to `rax`'s address
 #### `add`, `sub`
 ```nasm
 add <register>, <value>
 sub <register>, <value>
 ```
-`add` and `sub` take the value in our register and modify it by adding or substracting the second operands value from it. They is analogous to `n += 5` or `x -= y` in C. The big difference is that these operations can also set a number of flags in the processor. For example if the result of the operation would be zero, the Zero Flag (ZF) is set. The flags can then be used to make conditional control flow with jumps.
+`add` and `sub` take the value in our register and modify it by adding or substracting the second operand's value from it. They are analogous to `n += 5` or `x -= y` in C. The big difference is that these operations can also set a number of flags in the processor. For example if the result of the operation would be zero, the Zero Flag (ZF) is set. The flags can then be used to create conditional control flow with jumps.
 #### `cmp`, `test`
 ```nasm
 cmp <value>, <value>
@@ -65,7 +65,7 @@ jmp <label>
 jz <label>
 jne <label>
 ```
-The main control flow of assembly programs is done with the jump instructions. `jmp <label>` will find the matching label and the execution of the code goes on from there. Even more useful are the conditional jumps. Mathematical instructions like `add`, `sub` and `cmp` can set off flags, the conditional jumps check those flags and go to the label depending on the condition.
+The main control flow of assembly programs is done with the jump instructions. `jmp <label>` will find the matching label and the execution of the code goes on from there. Even more useful are the conditional jumps. Mathematical instructions like `add`, `sub` and `cmp` can set off flags, the conditional jumps check those flags and go to the label depending on the condition. These are the building blocks of your loops and if-then-elses.
 #### Labels
 Jumps are paired with labels.
 ```nasm
@@ -79,7 +79,7 @@ jz .error     ; if zero jump
 NASM allows creation of local labels via the dot prefix. This way you can reuse the same descriptive names in multiple functions without creating a collision.
 
 ⚠️ Note
-Functions are just global labels and `call` is just a `jmp` that pushes the return address on the stack for `ret`, so you can carry on after the function call.
+Functions are just global labels and `call` is just a `jmp` that pushes the return address on the stack for `ret`, so the the exwcution can continue from that address when the function is resolved.
 #### `ret`
 ```nasm
 ret
