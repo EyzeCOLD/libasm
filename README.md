@@ -43,7 +43,7 @@ You can also use indirection. Let's say `rax` contains the address of a variable
 Like many of the assembly instructions, `mov` has many variants like `movzx` (zero expand). When you do `movzx rax, byte [rcx]` you only copy one byte from `rcx` but also zero out the upper bytes in `rax`, to ensure a proper overwrite.
 
 ⚠️ Note
->Most of the time NASM can infer the size of the operation when you do a `mov`, but with indirection it can become ambiguous. In those situations you should use an operation size specifier, e.g. `mov byte [rax]`. The size specifiers are `byte`, `word` (2 bytes), `dword` (4 bytes) and `qword` (8 bytes).
+>Most of the time NASM can infer the size of the operation when you do a `mov`, but with indirection it can become ambiguous. In those situations you should use an operation size specifier, e.g. `mov byte [rax], rdi`. The size specifiers are `byte`, `word` (2 bytes), `dword` (4 bytes) and `qword` (8 bytes).
 
 ⚠️ Note
 > You can't have both operands of `mov` be dereferenced pointers. If you need to `mov [rax], [rcx]` you have to first store the value pointer by rcx into an intermediary register and then copy it from there to `rax`'s address
