@@ -1,18 +1,18 @@
 NAME := libasm.a
 
 
-SRCS	:= ft_strlen.asm \
-		   ft_strcpy.asm \
-		   ft_strcmp.asm \
-		   ft_write.asm \
-		   ft_read.asm \
-		   ft_strdup.asm \
+SRCS	:= ft_strlen.s \
+		   ft_strcpy.s \
+		   ft_strcmp.s \
+		   ft_write.s \
+		   ft_read.s \
+		   ft_strdup.s \
 		   libasm.inc
 SRC_DIR	:= ./src/
 SRCS	:= $(addprefix $(SRC_DIR), $(SRCS))
 
 OBJ_DIR	:= ./obj/
-OBJS	:= $(patsubst $(SRC_DIR)%.asm, $(OBJ_DIR)%.o, $(SRCS))
+OBJS	:= $(patsubst $(SRC_DIR)%.s, $(OBJ_DIR)%.o, $(SRCS))
 
 ###
 
@@ -43,7 +43,7 @@ test: $(NAME)
 $(NAME): $(OBJS)
 	$(AR) $(AR_FLAGS) $(NAME) $?
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.asm
+$(OBJ_DIR)%.o: $(SRC_DIR)%.s
 	@mkdir -p $(dir $@)
 	$(ASM) $(ASM_FLAGS) $< -o $@
 
